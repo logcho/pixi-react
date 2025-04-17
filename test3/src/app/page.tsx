@@ -7,8 +7,10 @@ export default function Home() {
   return (
     <div>
       <h1>Hello World</h1>
-      <Map setCoordinates={setCoordinates} />
       <p>Coordinates: {coordinates.x}, {coordinates.y}</p>
+      <div className="h-100 overflow-auto">
+        <Map setCoordinates={setCoordinates} />
+      </div>
     </div>
   );
 }

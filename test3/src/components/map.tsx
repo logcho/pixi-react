@@ -1,7 +1,7 @@
 "use client";
 import { Application, extend } from "@pixi/react";
 import { Assets, Container, Graphics, Sprite, Spritesheet, Texture } from "pixi.js";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 extend({
     Container,
@@ -13,11 +13,12 @@ interface MapProps {
     setCoordinates: (coordinates: { x: number; y: number }) => void;
 }
 
-
-
 export default function Map({ setCoordinates }: MapProps) {
+    const parentRef = useRef(null);
     const [texture, setTexture] = useState<Texture | null>(null);
     const [spritesheet, setSpritesheet] = useState<Spritesheet | null>(null);
+    const [lastHoveredTile, setLastHoveredTile] = useState<{x: number, y: number} | null>(null);
+
     useEffect(() => {
         Assets.load('/img/tiles.png').then(tex => {
             setTexture(tex);
@@ -55,7 +56,7 @@ export default function Map({ setCoordinates }: MapProps) {
     
 
     return (
-        <Application background={0x00FF00} >
+        <Application background={0x00FF00} ref={parentRef} width={1000} height={1000}>
             <pixiContainer>
 
                 {texture && (
