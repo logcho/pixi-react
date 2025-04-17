@@ -29,7 +29,7 @@ export default function Home() {
       <div 
         ref={parentRef} 
         style={{
-          width: '200%',
+          width: '100%',
           height: '100vh',
           overflow: 'auto',
           position: 'relative'
