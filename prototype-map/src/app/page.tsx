@@ -12,6 +12,7 @@ export default function Home() {
       <div className="w-5/6! h-screen overflow-auto">
         <Map 
         setCoordinates={setCoordinates}
+        pointerCoordinates={coordinates}
         />
       </div>
     </div>

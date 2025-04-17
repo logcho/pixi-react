@@ -1,8 +1,9 @@
 "use client"
 import { Application, extend } from "@pixi/react";
 import { Container, Sprite, Assets, Texture, Spritesheet } from "pixi.js";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Hex } from "viem";
+import ToolOverlay from "@/components/tool-overlay";
 
 extend({
     Container,
@@ -44,9 +45,10 @@ const coordinates = Array.from(rows, (_, y) =>
 
 interface MapProps {    
     setCoordinates: (coordinates: { x: number; y: number }) => void;
+    pointerCoordinates: { x: number; y: number };
 }
 
-export default function Map({ setCoordinates }: MapProps) {
+export default function Map({ setCoordinates, pointerCoordinates }: MapProps) {
     const [texture, setTexture] = useState(Texture.EMPTY);
     const [spritesheet, setSpritesheet] = useState<Spritesheet | null>(null);
 
@@ -63,7 +65,7 @@ export default function Map({ setCoordinates }: MapProps) {
         });
     }, []);
 
-    console.log(texture);
+    // console.log(texture);
     useEffect(() => {
         const frames = [...Array(1024).keys()].map((i) => ({
             frame: {
@@ -111,6 +113,7 @@ export default function Map({ setCoordinates }: MapProps) {
                     );
                 })}
             </pixiContainer>
+            <ToolOverlay pointerCoordinates={pointerCoordinates} />
         </Application>
     );
 }

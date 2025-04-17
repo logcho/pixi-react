@@ -13,12 +13,12 @@ interface MapProps {
     setCoordinates: (coordinates: { x: number; y: number }) => void;
 }
 
+
+
 export default function Map({ setCoordinates }: MapProps) {
     const parentRef = useRef(null);
     const [texture, setTexture] = useState<Texture | null>(null);
     const [spritesheet, setSpritesheet] = useState<Spritesheet | null>(null);
-    const [lastHoveredTile, setLastHoveredTile] = useState<{x: number, y: number} | null>(null);
-
     useEffect(() => {
         Assets.load('/img/tiles.png').then(tex => {
             setTexture(tex);
